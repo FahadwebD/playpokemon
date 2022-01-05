@@ -50,7 +50,7 @@ const Pokemon = ({poke}) => {
           
         }
 
-        fetch('http://localhost:5000/orders',{
+        fetch('https://powerful-cliffs-25620.herokuapp.com/orders',{
             method: 'POST',
             headers: {
                 'content-type':'application/json'
