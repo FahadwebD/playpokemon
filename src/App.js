@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+
+  const {loginWithPopup , loginWithRedirect, logout , user , isAuthenticated} = useAuth0()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>
+        <li><button onClick={loginWithPopup }>log i popup</button></li>
+        <li><button onClick={loginWithRedirect}> log i redirect</button></li>
+        <li><button onClick={logout }>logout</button></li>
+
+
+      </ul>
+      <h2>{isAuthenticated? 'loge in': 'not log in'}</h2>
+      {isAuthenticated && 
+      <h1>{JSON.stringify(user , null ,2)}</h1>}
     </div>
   );
 }
