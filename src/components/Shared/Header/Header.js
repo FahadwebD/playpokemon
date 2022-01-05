@@ -12,6 +12,8 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 
     
@@ -32,8 +34,8 @@ const Header = () => {
     return (
         <div>
              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems:'center', textAlign: 'center' , backgroundColor:'yellow'}}>
-       
-        <Typography sx={{ minWidth: 100 }}>Your Pokemon's</Typography>
+             <Link to='home' style={{marginRight:'15px' , textDecoration:'none'}}><Typography sx={{ minWidth: 100 }}>All Pokemon's</Typography></Link>
+       {isAuthenticated? <Link to='fav' style={{marginRight:'15px' , textDecoration:'none'}}><Typography sx={{ minWidth: 100 }}>Favourite Pokemon's</Typography></Link>:<Button onClick={loginWithPopup} style={{marginRight:'15px'}}><Typography sx={{ minWidth: 100 }}>Not Logged IN</Typography></Button>}
       {isAuthenticated?  <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -91,11 +93,9 @@ const Header = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> Profile
+          <Avatar /> {user?.nickname}
         </MenuItem>
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
+        
         <Divider />
         <MenuItem>
           <ListItemIcon>
@@ -103,8 +103,8 @@ const Header = () => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon onClick={logout}>
+        <MenuItem onClick={logout}>
+          <ListItemIcon >
             <Logout  fontSize="small" />
           </ListItemIcon>
           Logout

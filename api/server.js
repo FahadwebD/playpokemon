@@ -21,14 +21,15 @@ async function run (){
         const database = client.db('pokeymonplay');
         const ordersCollection = database.collection('orders');
      
-        // app.get('/orders/:email' , async(req ,res)=>{
-        //     const email = req.params.email;
-        //     const query = {email: email}
-        //     const cursor = ordersCollection.find(query);
-        //     const orders = await cursor.toArray();
-        //     res.json(orders)
+        app.get('/orders/:email' , async(req ,res)=>{
+            const email = req.params.email;
+            console.log(email)
+            const query = {email: email}
+            const cursor = ordersCollection.find(query);
+            const orders = await cursor.toArray();
+            res.json(orders)
 
-        // })
+        })
    
         app.post('/orders' , async(req ,res)=>{
             const order = req.body;

@@ -24,6 +24,7 @@ const Pokemon = ({poke}) => {
     
     const {loginWithPopup , loginWithRedirect, logout , user , isAuthenticated} = useAuth0()
   const [pokes , setPokes] = useState([])
+  
 
     useEffect(()=>{
         fetch(`https://pokeapi.co/api/v2/pokemon/${poke.name}`)
@@ -93,7 +94,7 @@ const Pokemon = ({poke}) => {
                 <div className="card-body"> <img style={{height:100}}  className="img img-fluid" src={pokes?.sprites?.front_default}alt=''/>
                 </div>
                 </Typography>
-                <Button onClick={()=>addToFavourite(pokes)}>Add</Button>
+                {isAuthenticated?<Button onClick={()=>addToFavourite(pokes)}>Add To Favourite</Button>:<Button onClick={loginWithPopup} style={{backgroundColor:'yellow' , color:'dark' , border:'none' , marginBottom:'10px'}}>Favourite</Button>}
                 </Box>
                  </Modal>
                    </div>
